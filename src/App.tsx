@@ -24,8 +24,6 @@ const PublicRoute = ({ children }: PrivateRouteProps) => {
 };
 
 function App() {
-  const isLoggedIn = useSelector((state: IState) => state.auth.isAuthenticated);
-  console.log(isLoggedIn);
   return (
     <div>
       <Routes>
