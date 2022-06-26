@@ -1,13 +1,16 @@
+import { ExitToApp } from "@mui/icons-material";
 import { Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import { ExitToApp } from "@mui/icons-material";
-import * as React from "react";
-import { IRegisterData } from "./Register";
 import { useSnackbar } from "notistack";
+import * as React from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
+import { authActions } from "../store/AuthSlice";
+import { IRegisterData } from "./Register";
 
 const Profile = () => {
   const [loading, setLoading] = React.useState(false);
@@ -15,17 +18,21 @@ const Profile = () => {
     localStorage.getItem("user") as string
   ) as IRegisterData;
   const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleLogout = () => {
     setLoading(true);
-    localStorage.removeItem("user");
-    window.location.reload();
-    // if (localStorage.removeItem("user") === null) {
-    setLoading(false);
-    enqueueSnackbar("Successfully logged out!", {
-      variant: "success",
-    });
-    // }
+
+    setTimeout(() => {
+      localStorage.removeItem("user");
+      dispatch(authActions.logout());
+      enqueueSnackbar("Successfully logged out!", {
+        variant: "success",
+      });
+      setLoading(false);
+      navigate("/login");
+    }, 1000);
   };
 
   return (
