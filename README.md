@@ -25,6 +25,8 @@ The project is completed with the given requirements and deployed in netlify.
 - Form to login with validation and error handling and proper routing with snackbars and redirects.
 - Profile page with user details and a logout button.
 - Small UI changes made for better user experience such as loading.
+- Made the project responsive.
+- Used TypeScript for the project.
 
 ## Local Environment Requirements
 
