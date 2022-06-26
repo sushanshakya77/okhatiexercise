@@ -8,7 +8,6 @@ import { ExitToApp } from "@mui/icons-material";
 import * as React from "react";
 import { IRegisterData } from "./Register";
 import { useSnackbar } from "notistack";
-import { useNavigate } from "react-router";
 
 const Profile = () => {
   const [loading, setLoading] = React.useState(false);
@@ -16,19 +15,17 @@ const Profile = () => {
     localStorage.getItem("user") as string
   ) as IRegisterData;
   const { enqueueSnackbar } = useSnackbar();
-  const navigate = useNavigate();
 
   const handleLogout = () => {
     setLoading(true);
     localStorage.removeItem("user");
-
-    if (localStorage.removeItem("user") === null) {
-      setLoading(false);
-      enqueueSnackbar("Successfully logged out!", {
-        variant: "success",
-      });
-      navigate("/");
-    }
+    window.location.reload();
+    // if (localStorage.removeItem("user") === null) {
+    setLoading(false);
+    enqueueSnackbar("Successfully logged out!", {
+      variant: "success",
+    });
+    // }
   };
 
   return (
